@@ -18,12 +18,12 @@ $ ssh-to-pgp -i $HOME/.ssh/id_rsa -o public-key.asc
 
 ## Install with nix
 
-```nix
+```console
 $ nix run -f https://github.com/Mic92/sops-to-nix/archive/master.tar.gz ssh-to-pgp
 ```
 
 ## Install with go
 
-``` nix
+```console
 $ go get github.com/Mic92/ssh-to-pgp
 ```
