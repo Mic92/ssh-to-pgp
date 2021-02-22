@@ -1,11 +1,11 @@
 { pkgs ? import <nixpkgs> {} }:
 pkgs.buildGoModule {
   pname = "ssh-to-pgp";
-  version = "0.0.1";
+  version = "1.0.1";
 
   src = ./.;
 
-  vendorSha256 = "sha256-ZF/WsmqmGHZIAGTPKJ70UhtmssNhiInEZfzrKxQLw9I=";
+  vendorSha256 = "sha256-OMWiJ1n8ynvIGcmotjuGGsRuAidYgVo5Y5JjrAw8fpc=";
 
   checkInputs = [ pkgs.gnupg ];
   checkPhase = ''
