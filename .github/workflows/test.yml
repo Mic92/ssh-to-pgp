@@ -1,5 +1,7 @@
 name: "Test"
 on:
+  pull:
+    branches: [ "main" ]
   pull_request:
   schedule:
     - cron:  '51 2 * * *'
