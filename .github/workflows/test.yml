@@ -1,6 +1,6 @@
 name: "Test"
 on:
-  pull:
+  push:
     branches: [ "main" ]
   pull_request:
   schedule:
