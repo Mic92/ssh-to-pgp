@@ -26,7 +26,7 @@ jobs:
       with:
         nix_path: "${{ matrix.nixPath }}"
     - name: Setup cachix
-      uses: cachix/cachix-action@v8
+      uses: cachix/cachix-action@v9
       with:
         name: mic92
         signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
