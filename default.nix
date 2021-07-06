@@ -1,7 +1,7 @@
 { pkgs ? import <nixpkgs> {} }:
 pkgs.buildGoModule {
   pname = "ssh-to-pgp";
-  version = "1.0.1";
+  version = "1.0.2";
 
   src = ./.;
 
