@@ -1,5 +1,6 @@
 name: "Test"
 on:
+  workflow_dispatch:
   push:
     branches: [ "main" ]
   pull_request:
@@ -16,7 +17,7 @@ jobs:
     strategy:
       matrix:
         nixPath:
-          - nixpkgs=https://github.com/NixOS/nixpkgs/archive/nixos-20.09.tar.gz
+          - nixpkgs=https://github.com/NixOS/nixpkgs/archive/nixos-21.05.tar.gz
           - nixpkgs=https://github.com/NixOS/nixpkgs/archive/nixpkgs-unstable.tar.gz
         os: [ ubuntu-latest, macos-latest ]
     runs-on: ${{ matrix.os }}
@@ -25,10 +26,5 @@ jobs:
     - uses: cachix/install-nix-action@v13
       with:
         nix_path: "${{ matrix.nixPath }}"
-    - name: Setup cachix
-      uses: cachix/cachix-action@v10
-      with:
-        name: mic92
-        signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
     - name: Build nix packages
       run: nix-build --no-out-link
