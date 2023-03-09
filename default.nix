@@ -5,7 +5,7 @@ pkgs.buildGoModule {
 
   src = ./.;
 
-  vendorSha256 = "sha256-LaXIVymXjqdfnaVYz7gmD4TjtX+xMf4JQYEGQAWfGP8=";
+  vendorSha256 = "sha256-3N3D0OSGai3czkfUB6rTMeGqfoZD5ZYg1lqRC24OeqA=";
 
   checkInputs = [ pkgs.gnupg ];
   checkPhase = ''
