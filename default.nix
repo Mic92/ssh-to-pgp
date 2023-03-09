@@ -7,7 +7,7 @@ pkgs.buildGoModule {
 
   vendorSha256 = "sha256-3N3D0OSGai3czkfUB6rTMeGqfoZD5ZYg1lqRC24OeqA=";
 
-  checkInputs = [ pkgs.gnupg ];
+  nativeCheckInputs = [ pkgs.gnupg ];
   checkPhase = ''
     HOME=$TMPDIR go test .
   '';
