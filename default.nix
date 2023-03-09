@@ -7,6 +7,7 @@ pkgs.buildGoModule {
 
   vendorSha256 = "sha256-3N3D0OSGai3czkfUB6rTMeGqfoZD5ZYg1lqRC24OeqA=";
 
+  checkInputs = [ pkgs.gnupg ]; # no longer needed when we get rid of nixpkgs 22.11
   nativeCheckInputs = [ pkgs.gnupg ];
   checkPhase = ''
     HOME=$TMPDIR go test .
