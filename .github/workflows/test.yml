@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - main
-      - staging
-      - trying
   pull_request:
   schedule:
     - cron:  '51 2 * * *'
