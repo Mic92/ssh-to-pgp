@@ -1,0 +1,24 @@
+queue_rules:
+  - name: default
+    merge_conditions:
+      - check-success=cross-build
+      - check-success=tests (nixpkgs=https://github.com/NixOS/nixpkgs/archive/nixos-22.11.tar.gz,
+        macos-latest)
+      - check-success=tests (nixpkgs=https://github.com/NixOS/nixpkgs/archive/nixos-22.11.tar.gz,
+        ubuntu-latest)
+      - check-success=tests (nixpkgs=https://github.com/NixOS/nixpkgs/archive/nixpkgs-unstable.tar.gz,
+        macos-latest)
+      - check-success=tests (nixpkgs=https://github.com/NixOS/nixpkgs/archive/nixpkgs-unstable.tar.gz,
+        ubuntu-latest)
+defaults:
+  actions:
+    queue:
+      allow_merging_configuration_change: true
+      method: rebase
+pull_request_rules:
+  - name: merge using the merge queue
+    conditions:
+      - base=main
+      - label~=merge-queue|dependencies
+    actions:
+      queue: {}

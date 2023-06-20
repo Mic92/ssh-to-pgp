@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - main
-      - staging
-      - trying
   pull_request:
   schedule:
     - cron:  '51 2 * * *'
@@ -14,19 +12,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - uses: cachix/install-nix-action@v21
+    - uses: cachix/install-nix-action@v22
     - run: nix-shell -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/nixpkgs-unstable.tar.gz --pure -p gox -p go --run "gox -osarch '!darwin/386' ."
   tests:
     strategy:
       matrix:
         nixPath:
-          - nixpkgs=https://github.com/NixOS/nixpkgs/archive/nixos-22.11.tar.gz
+          - nixpkgs=https://github.com/NixOS/nixpkgs/archive/nixos-23.05.tar.gz
           - nixpkgs=https://github.com/NixOS/nixpkgs/archive/nixpkgs-unstable.tar.gz
         os: [ ubuntu-latest, macos-latest ]
     runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v3
-    - uses: cachix/install-nix-action@v21
+    - uses: cachix/install-nix-action@v22
       with:
         nix_path: "${{ matrix.nixPath }}"
     - name: Build nix packages
