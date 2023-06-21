@@ -5,7 +5,7 @@ pkgs.buildGoModule {
 
   src = ./.;
 
-  vendorSha256 = "sha256-JmDWP0UuLWGNcrXi2xcVLvCdVDBuHbD3ji2u/L7Wjsg=";
+  vendorSha256 = "sha256-J9HuZhjeXSS4ej1RM+yn2VGoSdiS39PDM4fScAh6Eps=";
 
   checkInputs = [ pkgs.gnupg ]; # no longer needed when we get rid of nixpkgs 22.11
   nativeCheckInputs = [ pkgs.gnupg ];
