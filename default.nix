@@ -1,11 +1,11 @@
-{ pkgs ? import <nixpkgs> {} }:
+{ pkgs ? import <nixpkgs> {}, vendorHash ? "sha256-J9HuZhjeXSS4ej1RM+yn2VGoSdiS39PDM4fScAh6Eps=" }:
 pkgs.buildGoModule {
   pname = "ssh-to-pgp";
   version = "1.0.4";
 
   src = ./.;
 
-  vendorSha256 = "sha256-J9HuZhjeXSS4ej1RM+yn2VGoSdiS39PDM4fScAh6Eps=";
+  inherit vendorHash;
 
   checkInputs = [ pkgs.gnupg ]; # no longer needed when we get rid of nixpkgs 22.11
   nativeCheckInputs = [ pkgs.gnupg ];
