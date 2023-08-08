@@ -27,7 +27,7 @@ func parsePrivateKey(sshPrivateKey []byte) (*rsa.PrivateKey, error) {
 	return rsaKey, nil
 }
 
-func SSHPrivateKeyToPGP(sshPrivateKey []byte) (*openpgp.Entity, error) {
+func SSHPrivateKeyToPGP(sshPrivateKey []byte, name string, comment string, email string) (*openpgp.Entity, error) {
 	key, err := parsePrivateKey(sshPrivateKey)
 	if err != nil {
 		return nil, fmt.Errorf("failed to parse private ssh key: %w", err)
@@ -41,7 +41,7 @@ func SSHPrivateKeyToPGP(sshPrivateKey []byte) (*openpgp.Entity, error) {
 		PrivateKey: packet.NewRSAPrivateKey(timeNull, key),
 		Identities: make(map[string]*openpgp.Identity),
 	}
-	uid := packet.NewUserId("root", "Imported from SSH", "root@localhost")
+	uid := packet.NewUserId(name, comment, email)
 	isPrimaryID := true
 	gpgKey.Identities[uid.Id] = &openpgp.Identity{
 		Name:   uid.Id,

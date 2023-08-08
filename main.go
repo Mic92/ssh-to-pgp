@@ -13,7 +13,7 @@ import (
 )
 
 type options struct {
-	format, out, in string
+	format, out, in, name, comment, email string
 	privateKey      bool
 }
 
@@ -24,6 +24,9 @@ func parseFlags(args []string) options {
 	f.StringVar(&opts.format, "format", "armor", "GPG format encoding (binary|armor)")
 	f.StringVar(&opts.in, "i", "-", "Input path. Reads by default from standard output")
 	f.StringVar(&opts.out, "o", "-", "Output path. Prints by default to standard output")
+	f.StringVar(&opts.name, "name", "root", "Name to set for the PGP user id")
+	f.StringVar(&opts.comment, "comment", "Imported from SSH", "Comment to set for the PGP user id")
+	f.StringVar(&opts.email, "email", "root@localhost", "Email to set for the PGP user id")
 	if err := f.Parse(args[1:]); err != nil {
 		// should never happen since flag.ExitOnError
 		panic(err)
@@ -68,7 +71,7 @@ func convertKeys(args []string) error {
 		}
 	}
 
-	gpgKey, err := SSHPrivateKeyToPGP(sshKey)
+	gpgKey, err := SSHPrivateKeyToPGP(sshKey, opts.name, opts.comment, opts.email)
 	if err != nil {
 		return err
 	}
