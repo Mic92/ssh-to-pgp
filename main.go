@@ -14,7 +14,7 @@ import (
 
 type options struct {
 	format, out, in, name, comment, email string
-	privateKey      bool
+	privateKey                            bool
 }
 
 func parseFlags(args []string) options {
