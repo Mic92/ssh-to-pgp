@@ -5,7 +5,6 @@ import (
 	"flag"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"os"
 
 	"golang.org/x/crypto/openpgp"
@@ -40,12 +39,12 @@ func convertKeys(args []string) error {
 	var err error
 	var sshKey []byte
 	if opts.in == "-" {
-		sshKey, _ = ioutil.ReadAll(os.Stdin)
+		sshKey, err = io.ReadAll(os.Stdin)
 		if err != nil {
 			return fmt.Errorf("error reading stdin: %w", err)
 		}
 	} else {
-		sshKey, err = ioutil.ReadFile(opts.in)
+		sshKey, err = os.ReadFile(opts.in)
 		if err != nil {
 			return fmt.Errorf("error reading %s: %w", opts.in, err)
 		}
