@@ -5,16 +5,15 @@ import (
 	"flag"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"os"
 
-	"golang.org/x/crypto/openpgp"
-	"golang.org/x/crypto/openpgp/armor"
+	"github.com/ProtonMail/go-crypto/openpgp"
+	"github.com/ProtonMail/go-crypto/openpgp/armor"
 )
 
 type options struct {
 	format, out, in, name, comment, email string
-	privateKey      bool
+	privateKey                            bool
 }
 
 func parseFlags(args []string) options {
@@ -40,12 +39,12 @@ func convertKeys(args []string) error {
 	var err error
 	var sshKey []byte
 	if opts.in == "-" {
-		sshKey, _ = ioutil.ReadAll(os.Stdin)
+		sshKey, err = io.ReadAll(os.Stdin)
 		if err != nil {
 			return fmt.Errorf("error reading stdin: %w", err)
 		}
 	} else {
-		sshKey, err = ioutil.ReadFile(opts.in)
+		sshKey, err = os.ReadFile(opts.in)
 		if err != nil {
 			return fmt.Errorf("error reading %s: %w", opts.in, err)
 		}

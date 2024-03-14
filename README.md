@@ -1,8 +1,10 @@
 # ssh-to-pgp
+
 Convert SSH RSA keys to GPG keys
 
 ## Usage
--  Exports the private:
+
+- Exports the private:
 
 ```console
 $ ssh-to-pgp -private-key -i $HOME/.ssh/id_rsa -o private-key.asc
