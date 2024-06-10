@@ -40,7 +40,7 @@ func TestCli(t *testing.T) {
 
 	gpgHome := path.Join(tempdir, "gpg-home")
 	gpgEnv := append(os.Environ(), fmt.Sprintf("GNUPGHOME=%s", gpgHome))
-	ok(t, os.Mkdir(gpgHome, os.FileMode(0700)))
+	ok(t, os.Mkdir(gpgHome, os.FileMode(0o700)))
 
 	out := path.Join(tempdir, "out")
 	privKey := path.Join(assets, "id_rsa")
