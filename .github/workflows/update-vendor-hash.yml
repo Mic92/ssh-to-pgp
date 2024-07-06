@@ -7,7 +7,7 @@ permissions:
 jobs:
   dependabot:
     runs-on: ubuntu-latest
-    if: ${{ github.actor == 'dependabot[bot]' }}
+    if: ${{ github.actor == 'dependabot[bot]' || github.actor == 'mic92-renovate[bot]' }}
     steps:
       - uses: actions/checkout@v4
         with:
