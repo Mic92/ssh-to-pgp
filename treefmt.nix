@@ -1,34 +1,20 @@
-{ lib, inputs, ... }: {
-  imports = [
-    inputs.treefmt-nix.flakeModule
-  ];
+{ lib, inputs, ... }:
+{
+  imports = [ inputs.treefmt-nix.flakeModule ];
 
-  perSystem = { pkgs, ... }: {
-    treefmt = {
-      # Used to find the project root
-      projectRootFile = "flake.lock";
+  perSystem =
+    { pkgs, ... }:
+    {
+      treefmt = {
+        # Used to find the project root
+        projectRootFile = "flake.lock";
 
-      programs.deno.enable = true;
-      programs.gofumpt.enable = true;
-
-      settings.formatter = {
-        nix = {
-          command = "sh";
-          options = [
-            "-eucx"
-            ''
-              # First deadnix
-              ${lib.getExe pkgs.deadnix} --edit "$@"
-              # Then nixpkgs-fmt
-              ${lib.getExe pkgs.nixpkgs-fmt} "$@"
-            ''
-            "--"
-          ];
-          includes = [ "*.nix" ];
-          excludes = [ "nix/sources.nix" ];
+        programs = lib.mkIf (pkgs.hostPlatform.system != "riscv64-linux") {
+          deno.enable = true;
+          gofumpt.enable = true;
+          deadnix.enable = true;
+          nixfmt-rfc-style.enable = true;
         };
-
       };
     };
-  };
 }
