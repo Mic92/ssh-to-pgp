@@ -6,10 +6,6 @@ queue_rules:
     merge_conditions:
       - check-success=buildbot/nix-build
     merge_method: rebase
-defaults:
-  actions:
-    queue:
-      allow_merging_configuration_change: true
 
 pull_request_rules:
   - name: refactored queue action rule
