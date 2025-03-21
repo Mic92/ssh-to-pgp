@@ -51,6 +51,8 @@ func TestCli(t *testing.T) {
 		{"ssh-to-pgp", "-format=binary", "-private-key", "-i", privKey, "-o", out},
 	}
 	for _, cmd := range cmds {
+		// Make sure we clean the states between each command
+		exec.Command("rm", "-rf", gpgHome+"/*")
 		err = convertKeys(cmd)
 		ok(t, err)
 		cmd := exec.Command("gpg", "--with-fingerprint", "--show-key", out)
@@ -58,5 +60,11 @@ func TestCli(t *testing.T) {
 		cmd.Stderr = os.Stderr
 		cmd.Env = gpgEnv
 		ok(t, cmd.Run())
+		// Try to import the key we've produced
+		cmdImport := exec.Command("gpg", "--import", out)
+		cmdImport.Stdout = os.Stdout
+		cmdImport.Stderr = os.Stderr
+		cmdImport.Env = gpgEnv
+		ok(t, cmdImport.Run())
 	}
 }
