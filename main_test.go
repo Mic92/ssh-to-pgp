@@ -52,7 +52,7 @@ func TestCli(t *testing.T) {
 	}
 	for _, cmd := range cmds {
 		// Make sure we clean the states between each command
-		exec.Command("rm", "-rf", gpgHome + "/*")
+		exec.Command("rm", "-rf", gpgHome+"/*")
 		err = convertKeys(cmd)
 		ok(t, err)
 		cmd := exec.Command("gpg", "--with-fingerprint", "--show-key", out)
