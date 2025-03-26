@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
 	"os"
 	"os/exec"
 	"path"
@@ -34,7 +33,7 @@ func TestCli(t *testing.T) {
 	if assets == "" {
 		assets = "test-assets"
 	}
-	tempdir, err := ioutil.TempDir(TempRoot(), "testdir")
+	tempdir, err := os.MkdirTemp(TempRoot(), "testdir")
 	ok(t, err)
 	defer os.RemoveAll(tempdir)
 
