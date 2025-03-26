@@ -4,7 +4,7 @@
 }:
 pkgs.buildGoModule {
   pname = "ssh-to-pgp";
-  version = "1.0.4";
+  version = "1.1.5";
 
   src = ./.;
 
