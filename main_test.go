@@ -35,7 +35,11 @@ func TestCli(t *testing.T) {
 	}
 	tempdir, err := os.MkdirTemp(TempRoot(), "testdir")
 	ok(t, err)
-	defer os.RemoveAll(tempdir)
+	defer func() {
+		if err = os.RemoveAll(tempdir); err != nil {
+			fmt.Println("failed to remove tempdir:", err)
+		}
+	}()
 
 	gpgHome := path.Join(tempdir, "gpg-home")
 	gpgEnv := append(os.Environ(), fmt.Sprintf("GNUPGHOME=%s", gpgHome))
