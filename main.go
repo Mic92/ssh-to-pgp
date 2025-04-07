@@ -56,7 +56,11 @@ func convertKeys(args []string) error {
 		if err != nil {
 			return fmt.Errorf("failed to create %s: %w", opts.out, err)
 		}
-		defer writer.Close()
+		defer func() {
+			if err = writer.Close(); err != nil {
+				fmt.Fprintf(os.Stderr, "failed to close writer: %v", err)
+			}
+		}()
 	}
 
 	if opts.format == "armor" {
@@ -68,6 +72,11 @@ func convertKeys(args []string) error {
 		if err != nil {
 			return fmt.Errorf("failed to encode armor writer: %w", err)
 		}
+		defer func() {
+			if err = writer.Close(); err != nil {
+				fmt.Fprintf(os.Stderr, "failed to close writer: %v", err)
+			}
+		}()
 	}
 
 	gpgKey, err := SSHPrivateKeyToPGP(sshKey, opts.name, opts.comment, opts.email)
@@ -81,9 +90,6 @@ func convertKeys(args []string) error {
 		err = gpgKey.Serialize(writer)
 	}
 	if err == nil {
-		if opts.format == "armor" {
-			writer.Close()
-		}
 		fmt.Fprintf(os.Stderr, "%s\n", hex.EncodeToString(gpgKey.PrimaryKey.Fingerprint[:]))
 	}
 	return err
