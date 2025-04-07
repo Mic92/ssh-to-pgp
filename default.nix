@@ -1,6 +1,6 @@
 {
   pkgs ? import <nixpkgs> { },
-  vendorHash ? "sha256-2FKOonSdsAQPYttABW5xBkmXraqbTRc8ck882fmtlcI=",
+  vendorHash ? "sha256-KmQQ+gPjmOnCSJXlf0xLW7FcJf35n5HPeC+57hW4UFg=",
 }:
 pkgs.buildGoModule {
   pname = "ssh-to-pgp";
