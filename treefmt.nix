@@ -1,4 +1,4 @@
-{ lib, inputs, ... }:
+{ inputs, ... }:
 {
   imports = [ inputs.treefmt-nix.flakeModule ];
 
@@ -8,8 +8,9 @@
       treefmt = {
         # Used to find the project root
         projectRootFile = "flake.lock";
+        flakeCheck = pkgs.hostPlatform.system != "riscv64-linux";
 
-        programs = lib.mkIf (pkgs.hostPlatform.system != "riscv64-linux") {
+        programs = {
           deno.enable = true;
           gofumpt.enable = true;
           deadnix.enable = true;
