@@ -2,7 +2,7 @@ module github.com/Mic92/ssh-to-pgp
 
 go 1.23.0
 
-toolchain go1.24.4
+toolchain go1.24.5
 
 require (
 	github.com/ProtonMail/go-crypto v1.3.0
