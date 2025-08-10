@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs.url = "https://nixos.org/channels/nixpkgs-unstable/nixexprs.tar.xz";
     flake-parts.url = "github:hercules-ci/flake-parts";
+    flake-parts.inputs.nixpkgs-lib.follows = "nixpkgs";
 
     treefmt-nix.url = "github:numtide/treefmt-nix";
     treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
