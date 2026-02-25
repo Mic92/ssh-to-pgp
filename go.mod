@@ -10,6 +10,6 @@ require (
 )
 
 require (
-	github.com/cloudflare/circl v1.6.1 // indirect
+	github.com/cloudflare/circl v1.6.3 // indirect
 	golang.org/x/sys v0.41.0 // indirect
 )
