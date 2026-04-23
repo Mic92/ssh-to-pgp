@@ -1,9 +1,7 @@
 name: Update vendorHash
 on: pull_request
-
 permissions:
   contents: write
-
 jobs:
   dependabot:
     runs-on: ubuntu-latest
