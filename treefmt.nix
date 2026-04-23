@@ -8,13 +8,17 @@
       treefmt = {
         # Used to find the project root
         projectRootFile = "flake.lock";
-        flakeCheck = pkgs.hostPlatform.system != "riscv64-linux";
+        flakeCheck = pkgs.stdenv.hostPlatform.system != "riscv64-linux";
 
         programs = {
-          deno.enable = true;
+          mdformat.enable = true;
+          yamlfmt.enable = true;
           gofumpt.enable = true;
           deadnix.enable = true;
-          nixfmt.enable = true;
+          nixfmt = {
+            enable = true;
+            package = pkgs.nixfmt;
+          };
         };
       };
     };
