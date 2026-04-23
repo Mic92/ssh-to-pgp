@@ -14,7 +14,7 @@
           deno.enable = true;
           gofumpt.enable = true;
           deadnix.enable = true;
-          nixfmt-rfc-style.enable = true;
+          nixfmt.enable = true;
         };
       };
     };
