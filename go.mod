@@ -3,7 +3,7 @@ module github.com/Mic92/ssh-to-pgp
 go 1.26.0
 
 require (
-	github.com/ProtonMail/go-crypto v1.5.1
+	github.com/ProtonMail/go-crypto v1.5.2
 	golang.org/x/crypto v0.57.0
 )
 
