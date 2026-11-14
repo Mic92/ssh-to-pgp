@@ -32,6 +32,13 @@ func SSHPrivateKeyToPGP(sshPrivateKey []byte, name string, comment string, email
 	if err != nil {
 		return nil, fmt.Errorf("failed to parse private ssh key: %w", err)
 	}
+	// go-crypto's serializeRSAPrivateKey writes Primes[1] as p and Primes[0]
+	// as q, requiring Primes[1] < Primes[0]. Normalize them here.
+	if len(key.Primes) == 2 && key.Primes[0].Cmp(key.Primes[1]) < 0 {
+		key.Primes[0], key.Primes[1] = key.Primes[1], key.Primes[0]
+		key.Precomputed = rsa.PrecomputedValues{}
+		key.Precompute()
+	}
 
 	// Let's make keys reproducible
 	timeNull := time.Unix(0, 0)
